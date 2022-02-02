@@ -1,20 +1,21 @@
 package CodeErzeuger;
 
-import StackInterpreter.Interpreter;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.stringtemplate.v4.ST;
 
+import java.util.stream.Collectors;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
-import java.util.stream.Collectors;
+
+import StackInterpreter.Interpreter;
 
 import static StackInterpreter.Interpreter.load;
 
 public class Main {
-    //Teste in der Main for.clobal
+    //Teste in der Main Inhalt von for.clobal.c
     public static void main(String[] args) throws Exception {
         //Wandle Input in Tokens
         ClobalLexer lexer = new ClobalLexer(new ANTLRInputStream("""

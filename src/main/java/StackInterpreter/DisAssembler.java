@@ -5,7 +5,8 @@ package StackInterpreter; /***
  * courses, books, articles, and the like. Contact us if you are in doubt.
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
-***/
+ ***/
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,8 +18,7 @@ public class DisAssembler {
 
     public DisAssembler(byte[] code,
                         int codeSize,
-                        Object[] constPool)
-    {
+                        Object[] constPool) {
         this.code = code;
         this.codeSize = codeSize;
         this.constPool = constPool;
@@ -26,46 +26,45 @@ public class DisAssembler {
 
     public void disassemble() {
         System.out.println("Disassembly:");
-        int i=0;
-        while (i<codeSize) {
+        int i = 0;
+        while (i < codeSize) {
             i = disassembleInstruction(i);
             System.out.println();
         }
         System.out.println();
     }
 
-    public int disassembleInstruction(int ip)
-    {
+    public int disassembleInstruction(int ip) {
         int opcode = code[ip];
         BytecodeDefinition.Instruction I =
-            BytecodeDefinition.instructions[opcode];
+                BytecodeDefinition.instructions[opcode];
         String instrName = I.name;
         System.out.printf("%04d:\t%-11s", ip, instrName);
         ip++;
-        if ( I.n==0 ) {
+        if (I.n == 0) {
             System.out.print("  ");
             return ip;
         }
         List<String> operands = new ArrayList<String>();
-        for (int i=0; i<I.n; i++) {
+        for (int i = 0; i < I.n; i++) {
             int opnd = BytecodeAssembler.getInt(code, ip);
             ip += 4;
-            switch ( I.type[i] ) {
-                case BytecodeDefinition.REG :
-                    operands.add("r"+opnd);
+            switch (I.type[i]) {
+                case BytecodeDefinition.REG:
+                    operands.add("r" + opnd);
                     break;
-                case BytecodeDefinition.FUNC :
-                case BytecodeDefinition.POOL :
+                case BytecodeDefinition.FUNC:
+                case BytecodeDefinition.POOL:
                     operands.add(showConstPoolOperand(opnd));
                     break;
-                case BytecodeDefinition.INT :
+                case BytecodeDefinition.INT:
                     operands.add(String.valueOf(opnd));
                     break;
             }
         }
         for (int i = 0; i < operands.size(); i++) {
             String s = (String) operands.get(i);
-            if ( i>0 ) System.out.print(", ");
+            if (i > 0) System.out.print(", ");
             System.out.print(s);
         }
         return ip;
@@ -76,10 +75,10 @@ public class DisAssembler {
         buf.append("#");
         buf.append(poolIndex);
         String s = constPool[poolIndex].toString();
-        if ( constPool[poolIndex] instanceof String ) s='"'+s+'"';
-        else if ( constPool[poolIndex] instanceof FunctionSymbol ) {
-            FunctionSymbol fs = (FunctionSymbol)constPool[poolIndex];
-            s= fs.name+"()@"+fs.address;
+        if (constPool[poolIndex] instanceof String) s = '"' + s + '"';
+        else if (constPool[poolIndex] instanceof FunctionSymbol) {
+            FunctionSymbol fs = (FunctionSymbol) constPool[poolIndex];
+            s = fs.name + "()@" + fs.address;
         }
         buf.append(":");
         buf.append(s);

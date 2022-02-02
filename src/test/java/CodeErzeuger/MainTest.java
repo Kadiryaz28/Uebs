@@ -17,6 +17,7 @@ import java.io.*;
 import static StackInterpreter.Interpreter.load;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 @RunWith(JUnitParamsRunner.class)
 public class MainTest {

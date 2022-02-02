@@ -7,7 +7,7 @@ package StackInterpreter;
  * courses, books, articles, and the like. Contact us if you are in doubt.
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
-***/
+ ***/
 public class BytecodeDefinition {
     // operand types
     public static final int REG = AssemblerParser.REG;
@@ -19,9 +19,22 @@ public class BytecodeDefinition {
         String name; // E.g., "iadd", "call"
         int[] type = new int[3];
         int n = 0;
-        public Instruction(String name) { this(name,0,0,0); n=0; }
-        public Instruction(String name, int a) { this(name,a,0,0); n=1; }
-        public Instruction(String name, int a, int b) { this(name,a,b,0); n=2; }
+
+        public Instruction(String name) {
+            this(name, 0, 0, 0);
+            n = 0;
+        }
+
+        public Instruction(String name, int a) {
+            this(name, a, 0, 0);
+            n = 1;
+        }
+
+        public Instruction(String name, int a, int b) {
+            this(name, a, b, 0);
+            n = 2;
+        }
+
         public Instruction(String name, int a, int b, int c) {
             this.name = name;
             type[0] = a;
@@ -64,38 +77,38 @@ public class BytecodeDefinition {
     public static final short INSTR_POP = 30;    // throw away top of stack
     public static final short INSTR_HALT = 31;
 
-    public static Instruction[] instructions = new Instruction[] {
-        null, // <INVALID>
-        new Instruction("iadd"), // index is the opcode
-        new Instruction("isub"),
-        new Instruction("imul"),
-        new Instruction("ilt"),
-        new Instruction("ieq"),
-        new Instruction("fadd"),
-        new Instruction("fsub"),
-        new Instruction("fmul"),
-        new Instruction("flt"),
-        new Instruction("feq"),
-        new Instruction("itof"),
-        new Instruction("call", FUNC),
-        new Instruction("ret"),
-        new Instruction("br", INT),
-        new Instruction("brt", INT),
-        new Instruction("brf", INT),
-        new Instruction("cconst", INT),
-        new Instruction("iconst", INT),
-        new Instruction("fconst", POOL),
-        new Instruction("sconst", POOL),
-        new Instruction("load", INT),
-        new Instruction("gload", INT),
-        new Instruction("fload", INT),
-        new Instruction("store", INT),
-        new Instruction("gstore", INT),
-        new Instruction("fstore", INT),
-        new Instruction("print"),
-        new Instruction("struct", INT),
-        new Instruction("null"),
-        new Instruction("pop"),
-        new Instruction("halt") 
+    public static Instruction[] instructions = new Instruction[]{
+            null, // <INVALID>
+            new Instruction("iadd"), // index is the opcode
+            new Instruction("isub"),
+            new Instruction("imul"),
+            new Instruction("ilt"),
+            new Instruction("ieq"),
+            new Instruction("fadd"),
+            new Instruction("fsub"),
+            new Instruction("fmul"),
+            new Instruction("flt"),
+            new Instruction("feq"),
+            new Instruction("itof"),
+            new Instruction("call", FUNC),
+            new Instruction("ret"),
+            new Instruction("br", INT),
+            new Instruction("brt", INT),
+            new Instruction("brf", INT),
+            new Instruction("cconst", INT),
+            new Instruction("iconst", INT),
+            new Instruction("fconst", POOL),
+            new Instruction("sconst", POOL),
+            new Instruction("load", INT),
+            new Instruction("gload", INT),
+            new Instruction("fload", INT),
+            new Instruction("store", INT),
+            new Instruction("gstore", INT),
+            new Instruction("fstore", INT),
+            new Instruction("print"),
+            new Instruction("struct", INT),
+            new Instruction("null"),
+            new Instruction("pop"),
+            new Instruction("halt")
     };
 }
