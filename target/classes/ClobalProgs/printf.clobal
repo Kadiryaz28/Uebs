@@ -1,0 +1,14 @@
+int a;
+int b;
+int c;
+int d;
+int z;
+int main() {
+  a = 2;
+  b = 3;
+  c = 4;
+  d = 5;
+  z = a * b + c * d;
+  printf(z);
+  return 0;
+}

@@ -1,0 +1,26 @@
+globalVar(value) ::= ".globals <value>"
+function(fname) ::= ".def <fname>: args=0, locals=0"
+
+StatAssign(fname) ::= "gstore <fname>"
+
+global(v) ::= "gload <v>"
+Cons(v) ::= "iconst <v>"
+
+StatPrint() ::= "print"
+
+elseBr(contain)::= "<contain>:"
+
+StatReturn() ::= "ret"
+
+ADD() ::= "iadd"
+SUB() ::= "isub"
+MUL() ::= "imul"
+DIV() ::= "idiv"
+
+callFunction(cFunc) ::= "call <cFunc>"
+
+ilt() ::= "ilt"
+ieq() ::= "ieq"
+brf(br) ::= "brf <br>"
+brt(br) ::= "brt <br>"
+br(br) ::= "br <br>"
